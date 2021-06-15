@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.93.2 TBA
+
+Changes:
+
+- Fixing electron camera access - extending entitlements
+
 ## 0.93.1 Jun 14, 2021
 
 Contributed:
