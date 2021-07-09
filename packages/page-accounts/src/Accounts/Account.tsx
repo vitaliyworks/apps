@@ -18,6 +18,7 @@ import styled, { ThemeContext } from 'styled-components';
 import { ApiPromise } from '@polkadot/api';
 import { AddressInfo, AddressMini, AddressSmall, Badge, Button, ChainLock, CryptoType, Forget, Icon, IdentityIcon, LinkExternal, Menu, Popup, StatusContext, Tags } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useBestNumber, useCall, useLedger, useToggle } from '@polkadot/react-hooks';
+import { useBalancesAll } from '@polkadot/react-hooks/useBalance';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN_ZERO, formatBalance, formatNumber, isFunction } from '@polkadot/util';
 
@@ -106,7 +107,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const api = useApi();
   const { getLedger } = useLedger();
   const bestNumber = useBestNumber();
-  const balancesAll = useCall<DeriveBalancesAll>(api.api.derive.balances?.all, [address]);
+  const balancesAll = useBalancesAll(address);
   const stakingInfo = useCall<DeriveStakingAccount>(api.api.derive.staking?.account, [address]);
   const democracyLocks = useCall<DeriveDemocracyLock[]>(api.api.derive.democracy?.locks, [address]);
   const recoveryInfo = useCall<RecoveryConfig | null>(api.api.query.recovery?.recoverable, [address], transformRecovery);
