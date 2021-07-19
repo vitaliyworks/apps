@@ -26,7 +26,7 @@ import Account from './Account';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 
-const ss = ({ className, balanceTotal, style }: any) => {
+const Summary = ({ className, balanceTotal, style }: any) => {
   return (
     <div className={className} style={style} >
       <div>
@@ -39,7 +39,7 @@ const ss = ({ className, balanceTotal, style }: any) => {
   )
 }
 
-export default React.memo(styled(ss)`
+export default React.memo(styled(Summary)`
     background-color: red;
     margin-top: 200px;
     margin-bottom: 200px;
