@@ -128,20 +128,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
     []
   );
 
-  const footer = useMemo(() => (
-    <tr>
-      <td colSpan={3} />
-      <td className='media--1400' />
-      <td colSpan={2} />
-      <td className='media--1500' />
-      <td className='number'>
-        {balanceTotal && <FormatBalance value={balanceTotal} />}
-      </td>
-      <td />
-      <td className='media--1400' />
-    </tr>
-  ), [balanceTotal]);
-
   const filter = useMemo(() => (
     <div className='filter--tags'>
       <Input
@@ -240,7 +226,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <Table
         empty={!isLoading && sortedAccountsWithDelegation && t<string>("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
         filter={filter}
-        footer={footer}
         header={headerRef.current}
       >
         {!isLoading && sortedAccountsWithDelegation?.map(({ account, delegation, isFavorite }, index): React.ReactNode => (
