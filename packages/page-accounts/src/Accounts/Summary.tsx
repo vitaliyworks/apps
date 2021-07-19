@@ -26,11 +26,11 @@ import Account from './Account';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 
-const Summary = ({ className, balanceTotal, transferableTotal, lockedTotal, style }: any) => {
+const Summary = ({ className, balanceTotal, transferableTotal, lockedTotal }: any) => {
   const showBalance = (amount: BN) => <FormatBalance value={amount} />;
 
   return (
-    <div className={className} style={style} >
+    <div className={className} >
       <div>
         TOTAL BALANCE: {showBalance(balanceTotal)}
       </div>
