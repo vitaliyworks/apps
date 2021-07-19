@@ -30,10 +30,11 @@ const Summary = ({ className, balanceTotal, style }: any) => {
   return (
     <div className={className} style={style} >
       <div>
-        <p>
-        Hello there: <FormatBalance value={balanceTotal} />
-    Kek
-    </p>
+      TOTAL BALANCE: <FormatBalance value={balanceTotal} />
+      </div>
+
+      <div>
+      TRANSFERABBLE BALANCE: <FormatBalance value={balanceTotal} />
       </div>
     </div>
   )
