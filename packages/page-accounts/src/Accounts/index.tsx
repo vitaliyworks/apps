@@ -11,7 +11,6 @@ import styled from 'styled-components';
 
 import { Button, Input, Table } from '@polkadot/react-components';
 import { useAccounts, useApi, useCall, useFavorites, useIpfs, useLedger, useLoadingDelay, useToggle } from '@polkadot/react-hooks';
-import { FormatBalance } from '@polkadot/react-query';
 import { BN_ZERO } from '@polkadot/util';
 
 import CreateModal from '../modals/Create';
@@ -27,13 +26,13 @@ import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 import Summary from './Summary';
 
-interface Kek {
+interface AccountBalance {
   balance: BN;
   locked: BN;
 }
 
 interface Balances {
-  accounts: Record<string, Kek>;
+  accounts: Record<string, AccountBalance>;
   balanceTotal?: BN;
   transferableTotal?: BN;
   lockedTotal?: BN;
@@ -122,14 +121,16 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
   const _setBalance = useCallback(
     (account: string, balance: BN, locked: BN) =>
-      setBalances(({ accounts, locked }: Balances): Balances => {
-        accounts[account]['balance'] = balance;
-        accounts[account]['locked'] = locked;
+      setBalances(({ accounts }: Balances): Balances => {
+        accounts[account] = { balance, locked };
+
+        const aggregate = (key: 'balance' | 'locked') =>
+          Object.values(accounts).reduce((total: BN, value: AccountBalance) => total.add(value[key]), BN_ZERO);
 
         return {
           accounts,
-          balanceTotal: Object.values(accounts).reduce((total: BN, value: BN) => total.add(value), BN_ZERO),
-          lockedTotal: Object.values(accounts).reduce((total: BN, value: BN) => total.add(value), BN_ZERO),
+          balanceTotal: aggregate('balance'),
+          lockedTotal: aggregate('locked'),
           transferableTotal: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
         };
       }),
