@@ -26,19 +26,22 @@ import Account from './Account';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 
-const Summary = ({ balanceTotal }: any) => {
-  return <div className='summaryBox'>
-    <div>
-    Hello there: <FormatBalance value={balanceTotal} />
-  Kek
+const ss = ({ className, balanceTotal, style }: any) => {
+  return (
+    <div className={className} style={style} >
+      <div>
+        <p>
+        Hello there: <FormatBalance value={balanceTotal} />
+    Kek
+    </p>
+      </div>
     </div>
-  </div>
+  )
 }
 
-export default React.memo(styled(Summary)`
-  .summaryBox {
+export default React.memo(styled(ss)`
+    background-color: red;
     margin-top: 200px;
     margin-bot: 200px;
     opacity: 0.5;
-  }
 `);
