@@ -48,6 +48,6 @@ const Summary = ({ className, balanceTotal, transferableTotal, lockedTotal, styl
 
 export default React.memo(styled(Summary)`
     background-color: red;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
+    margin-bottom: 30px;
 `);
