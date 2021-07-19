@@ -28,9 +28,17 @@ import BannerExtension from './BannerExtension';
 
 
 const Summary = ({ balanceTotal }: any) => {
-  return <div>
-      Hello there: <FormatBalance value={balanceTotal} />
+  return <div className='summaryBox'>
+    <div>
+    Hello there: <FormatBalance value={balanceTotal} />
+  Kek
+    </div>
   </div>
 }
 
-export default Summary;
+export default React.memo(styled(Summary)`
+  .summaryBox {
+    margin-top: 200px;
+    margin-bot: 200px;
+  }
+`);
