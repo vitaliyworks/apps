@@ -27,8 +27,13 @@ import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 import Summary from './Summary';
 
+interface Kek {
+  balance: BN;
+  locked: BN;
+}
+
 interface Balances {
-  accounts: Record<string, BN>;
+  accounts: Record<string, Kek>;
   balanceTotal?: BN;
   transferableTotal?: BN;
   lockedTotal?: BN;
@@ -116,9 +121,10 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   }, [api, delegations, sortedAccounts]);
 
   const _setBalance = useCallback(
-    (account: string, balance: BN) =>
-      setBalances(({ accounts }: Balances): Balances => {
-        accounts[account] = balance;
+    (account: string, balance: BN, locked: BN) =>
+      setBalances(({ accounts, locked }: Balances): Balances => {
+        accounts[account]['balance'] = balance;
+        accounts[account]['locked'] = locked;
 
         return {
           accounts,

@@ -45,7 +45,7 @@ interface Props {
   filter: string;
   isFavorite: boolean;
   proxy?: [ProxyDefinition[], BN];
-  setBalance: (address: string, value: BN) => void;
+  setBalance: (address: string, totalBalance: BN, lockedBalance: BN) => void;
   toggleFavorite: (address: string) => void;
 }
 
@@ -118,7 +118,9 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
 
   useEffect((): void => {
     if (balancesAll) {
-      setBalance(address, balancesAll.freeBalance.add(balancesAll.reservedBalance));
+      setBalance(address,
+                 balancesAll.freeBalance.add(balancesAll.reservedBalance),
+                 balancesAll.lockedBalance);
 
       console.log({ balancesAll });
 
