@@ -128,6 +128,13 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
     []
   );
 
+  const summary = useMemo(() => (
+    <Summary
+      balanceTotal={balanceTotal}
+      transferableTotal={transferableTotal}
+    />
+  ), [balanceTotal, transferableTotal]);
+
   const filter = useMemo(() => (
     <div className='filter--tags'>
       <Input
@@ -218,10 +225,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <BannerExtension />
       <BannerClaims />
 
-      <Summary
-        balanceTotal={balanceTotal}
-        transferableTotal={transferableTotal}
-      />
+      {summary}
 
       <Table
         empty={!isLoading && sortedAccountsWithDelegation && t<string>("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
