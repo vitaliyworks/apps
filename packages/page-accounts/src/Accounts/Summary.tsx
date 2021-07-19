@@ -26,7 +26,6 @@ import Account from './Account';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 
-
 const Summary = ({ balanceTotal }: any) => {
   return <div className='summaryBox'>
     <div>
@@ -40,5 +39,6 @@ export default React.memo(styled(Summary)`
   .summaryBox {
     margin-top: 200px;
     margin-bot: 200px;
+    opacity: 0.5;
   }
 `);
