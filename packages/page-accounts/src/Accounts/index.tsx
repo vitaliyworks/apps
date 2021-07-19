@@ -122,7 +122,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
         return {
           accounts,
           balanceTotal: Object.values(accounts).reduce((total: BN, value: BN) => total.add(value), BN_ZERO),
-          transferableTotal: BN_ZERO
+          transferableTotal: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
         };
       }),
     []
