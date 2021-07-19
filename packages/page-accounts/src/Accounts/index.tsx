@@ -30,6 +30,7 @@ import Summary from './Summary';
 interface Balances {
   accounts: Record<string, BN>;
   balanceTotal?: BN;
+  transferableTotal?: BN;
 }
 
 interface Sorted {
@@ -57,7 +58,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const [isProxyOpen, toggleProxy] = useToggle();
   const [isQrOpen, toggleQr] = useToggle();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
-  const [{ balanceTotal }, setBalances] = useState<Balances>({ accounts: {} });
+  const [{ balanceTotal, transferableTotal }, setBalances] = useState<Balances>({ accounts: {} });
   const [filterOn, setFilter] = useState<string>('');
   const [sortedAccountsWithDelegation, setSortedAccountsWithDelegation] = useState<SortedAccount[] | undefined>();
   const [{ sortedAccounts, sortedAddresses }, setSorted] = useState<Sorted>({ sortedAccounts: [], sortedAddresses: [] });
@@ -120,7 +121,8 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
         return {
           accounts,
-          balanceTotal: Object.values(accounts).reduce((total: BN, value: BN) => total.add(value), BN_ZERO)
+          balanceTotal: Object.values(accounts).reduce((total: BN, value: BN) => total.add(value), BN_ZERO),
+          transferableTotal: BN_ZERO
         };
       }),
     []
@@ -230,7 +232,10 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <BannerExtension />
       <BannerClaims />
 
-      <Summary balanceTotal={balanceTotal} />
+      <Summary
+        balanceTotal={balanceTotal}
+        transferableTotal={transferableTotal}
+      />
 
       <Table
         empty={!isLoading && sortedAccountsWithDelegation && t<string>("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
