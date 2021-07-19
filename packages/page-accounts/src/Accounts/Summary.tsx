@@ -26,7 +26,7 @@ import Account from './Account';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 
-const Summary = ({ className, balanceTotal, transferableTotal, style }: any) => {
+const Summary = ({ className, balanceTotal, transferableTotal, lockedTotal, style }: any) => {
   const showBalance = (amount: BN) => <FormatBalance value={amount} />;
 
   return (
@@ -37,6 +37,10 @@ const Summary = ({ className, balanceTotal, transferableTotal, style }: any) => 
 
       <div>
         TRANSFERABBLE BALANCE: {showBalance(transferableTotal)}
+      </div>
+
+      <div>
+        TOTAL LOCKED: {showBalance(lockedTotal)}
       </div>
     </div>
   )

@@ -31,6 +31,7 @@ interface Balances {
   accounts: Record<string, BN>;
   balanceTotal?: BN;
   transferableTotal?: BN;
+  lockedTotal?: BN;
 }
 
 interface Sorted {
@@ -58,7 +59,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const [isProxyOpen, toggleProxy] = useToggle();
   const [isQrOpen, toggleQr] = useToggle();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
-  const [{ balanceTotal, transferableTotal }, setBalances] = useState<Balances>({ accounts: {} });
+  const [{ balanceTotal, transferableTotal, lockedTotal }, setBalances] = useState<Balances>({ accounts: {} });
   const [filterOn, setFilter] = useState<string>('');
   const [sortedAccountsWithDelegation, setSortedAccountsWithDelegation] = useState<SortedAccount[] | undefined>();
   const [{ sortedAccounts, sortedAddresses }, setSorted] = useState<Sorted>({ sortedAccounts: [], sortedAddresses: [] });
@@ -122,6 +123,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
         return {
           accounts,
           balanceTotal: Object.values(accounts).reduce((total: BN, value: BN) => total.add(value), BN_ZERO),
+          lockedTotal: Object.values(accounts).reduce((total: BN, value: BN) => total.add(value), BN_ZERO),
           transferableTotal: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
         };
       }),
@@ -132,6 +134,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
     <Summary
       balanceTotal={balanceTotal}
       transferableTotal={transferableTotal}
+      lockedTotal={lockedTotal}
     />
   ), [balanceTotal, transferableTotal]);
 
