@@ -59,7 +59,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const [isProxyOpen, toggleProxy] = useToggle();
   const [isQrOpen, toggleQr] = useToggle();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
-  const [{ balanceTotal, transferableTotal, lockedTotal }, setBalances] = useState<Balances>({ accounts: {} });
+  const [balances, setBalances] = useState<Balances>({ accounts: {} });
   const [filterOn, setFilter] = useState<string>('');
   const [sortedAccountsWithDelegation, setSortedAccountsWithDelegation] = useState<SortedAccount[] | undefined>();
   const [{ sortedAccounts, sortedAddresses }, setSorted] = useState<Sorted>({ sortedAccounts: [], sortedAddresses: [] });
@@ -132,11 +132,11 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
   const summary = useMemo(() => (
     <Summary
-      balanceTotal={balanceTotal}
-      transferableTotal={transferableTotal}
-      lockedTotal={lockedTotal}
+      balanceTotal={balances.balanceTotal}
+      transferableTotal={balances.transferableTotal}
+      lockedTotal={balances.lockedTotal}
     />
-  ), [balanceTotal, transferableTotal]);
+  ), [balances.balanceTotal, balances.transferableTotal]);
 
   const filter = useMemo(() => (
     <div className='filter--tags'>
