@@ -124,7 +124,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       setBalances(({ accounts }: Balances): Balances => {
         accounts[account] = { balance, locked };
 
-        const aggregate = (key: 'balance' | 'locked') =>
+        const aggregate = (key: keyof AccountBalance) =>
           Object.values(accounts).reduce((total: BN, value: AccountBalance) => total.add(value[key]), BN_ZERO);
 
         return {
