@@ -120,6 +120,8 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
     if (balancesAll) {
       setBalance(address, balancesAll.freeBalance.add(balancesAll.reservedBalance));
 
+      console.log({ balancesAll });
+
       api.api.tx.vesting?.vest && setVestingTx(() =>
         balancesAll.vestingLocked.isZero()
           ? null

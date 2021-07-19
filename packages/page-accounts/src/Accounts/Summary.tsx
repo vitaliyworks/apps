@@ -41,7 +41,6 @@ const Summary = ({ className, balanceTotal, style }: any) => {
 
 export default React.memo(styled(Summary)`
     background-color: red;
-    margin-top: 200px;
-    margin-bottom: 200px;
-    opacity: 0.5;
+    margin-top: 20px;
+    margin-bottom: 20px;
 `);
