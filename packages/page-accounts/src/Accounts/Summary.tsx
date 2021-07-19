@@ -42,6 +42,6 @@ const ss = ({ className, balanceTotal, style }: any) => {
 export default React.memo(styled(ss)`
     background-color: red;
     margin-top: 200px;
-    margin-bot: 200px;
+    margin-bottom: 200px;
     opacity: 0.5;
 `);
