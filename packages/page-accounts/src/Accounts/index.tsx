@@ -34,7 +34,7 @@ interface AccountBalance {
 interface Balances {
   accounts: Record<string, AccountBalance>;
   balanceTotal?: BN;
-  transferableTotal?: BN;
+  transferrableTotal?: BN;
   lockedTotal?: BN;
 }
 
@@ -131,7 +131,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
           accounts,
           balanceTotal: aggregate('balance'),
           lockedTotal: aggregate('locked'),
-          transferableTotal: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
+          transferrableTotal: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
         };
       }),
     []
@@ -140,10 +140,10 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const summary = useMemo(() => (
     <Summary
       balanceTotal={balances.balanceTotal}
-      transferableTotal={balances.transferableTotal}
+      transferrableTotal={balances.transferrableTotal}
       lockedTotal={balances.lockedTotal}
     />
-  ), [balances.balanceTotal, balances.transferableTotal]);
+  ), [balances.balanceTotal, balances.transferrableTotal]);
 
   const filter = useMemo(() => (
     <div className='filter--tags'>
