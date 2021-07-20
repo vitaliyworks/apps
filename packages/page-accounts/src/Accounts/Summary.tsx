@@ -47,6 +47,9 @@ function Summary({ className, balance }: Props) {
         <CardSummary label={<Title text={t('bonded')} help={'FIXME: add help'}/>}>
           <FormatBalance value={balance?.bonded}/>
         </CardSummary>
+        <CardSummary label={<Title text={t('redeemable')} help={'FIXME: add help'}/>}>
+          <FormatBalance value={balance?.redeemable}/>
+        </CardSummary>
       </section>
     </SummaryBox>
   )
