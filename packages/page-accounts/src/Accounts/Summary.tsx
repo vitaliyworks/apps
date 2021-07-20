@@ -6,7 +6,7 @@ import type { AccountBalance } from '../types';
 import React from 'react';
 
 import { FormatBalance } from '@polkadot/react-query';
-import { CardSummary, SummaryBox, LabelHelp } from '@polkadot/react-components';
+import { CardSummary, SummaryBox, LabelHelp, Label, StakingRedeemable } from '@polkadot/react-components';
 import { useTranslation } from '@polkadot/app-treasury/translate';
 
 interface Props {
@@ -14,13 +14,13 @@ interface Props {
   balance?: AccountBalance;
 }
 
-interface LabelProps {
+interface TitleProps {
   className?: string;
   text: string;
   help: string;
 }
 
-function Label({ className, text, help }: LabelProps) {
+function Title({ className, text, help }: TitleProps) {
   return (
     <div className={className}>
       {text}
@@ -35,14 +35,17 @@ function Summary({ className, balance }: Props) {
   return (
     <SummaryBox className={className}>
       <section>
-        <CardSummary label={<Label text={t('total balance')} help={'FIXME: add help'}/>}>
+        <CardSummary label={<Title text={t('total balance')} help={'FIXME: add help'}/>}>
           <FormatBalance value={balance?.total}/>
         </CardSummary>
-        <CardSummary label={<Label text={t('total transferrable')} help={'FIXME: add help'}/>}>
+        <CardSummary label={<Title text={t('total transferrable')} help={'FIXME: add help'}/>}>
           <FormatBalance value={balance?.transferrable}/>
         </CardSummary>
-        <CardSummary label={<Label text={t('total locked')} help={'FIXME: add help'}/>}>
+        <CardSummary label={<Title text={t('total locked')} help={'FIXME: add help'}/>}>
           <FormatBalance value={balance?.locked}/>
+        </CardSummary>
+        <CardSummary label={<Title text={t('bonded')} help={'FIXME: add help'}/>}>
+          <FormatBalance value={balance?.bonded}/>
         </CardSummary>
       </section>
     </SummaryBox>

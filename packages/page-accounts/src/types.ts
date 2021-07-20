@@ -38,4 +38,5 @@ export interface AccountBalance {
   total: BN;
   locked: BN;
   transferrable: BN;
+  bonded: BN;
 }
