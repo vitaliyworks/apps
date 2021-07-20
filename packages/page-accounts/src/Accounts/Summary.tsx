@@ -6,7 +6,7 @@ import type { AccountBalance } from '../types';
 import React from 'react';
 
 import { FormatBalance } from '@polkadot/react-query';
-import { CardSummary, SummaryBox, LabelHelp, Label, StakingRedeemable } from '@polkadot/react-components';
+import { CardSummary, SummaryBox, LabelHelp } from '@polkadot/react-components';
 import { useTranslation } from '@polkadot/app-treasury/translate';
 
 interface Props {
@@ -49,6 +49,9 @@ function Summary({ className, balance }: Props) {
         </CardSummary>
         <CardSummary label={<Title text={t('redeemable')} help={'FIXME: add help'}/>}>
           <FormatBalance value={balance?.redeemable}/>
+        </CardSummary>
+        <CardSummary label={<Title text={t('unbonding')} help={'FIXME: add help'}/>}>
+          <FormatBalance value={balance?.unbonding}/>
         </CardSummary>
       </section>
     </SummaryBox>
