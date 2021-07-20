@@ -40,4 +40,5 @@ export interface AccountBalance {
   transferrable: BN;
   bonded: BN;
   redeemable: BN;
+  unbonding: BN;
 }

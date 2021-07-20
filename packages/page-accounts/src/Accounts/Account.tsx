@@ -66,6 +66,19 @@ function calcVisible (filter: string, name: string, tags: string[]): boolean {
   }, name.toLowerCase().includes(_filter));
 }
 
+function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
+  if (!stakingInfo?.unlocking) {
+    return BN_ZERO;
+  }
+
+  const filtered = stakingInfo.unlocking
+    .filter(({ remainingEras, value }) => value.gt(BN_ZERO) && remainingEras.gt(BN_ZERO))
+    .map((unlock) => unlock.value);
+  const total = filtered.reduce((total, value) => total.iadd(value), new BN(0));
+
+  return total;
+}
+
 function createClearDemocracyTx (api: ApiPromise, address: string, unlockableIds: BN[]): SubmittableExtrinsic<'promise'> | null {
   return api.tx.utility
     ? api.tx.utility.batch(
@@ -124,7 +137,8 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
         locked: balancesAll.lockedBalance,
         transferrable: balancesAll.availableBalance,
         bonded: stakingInfo?.stakingLedger.active.unwrap() ?? BN_ZERO,
-        redeemable: stakingInfo?.redeemable ?? BN_ZERO
+        redeemable: stakingInfo?.redeemable ?? BN_ZERO,
+        unbonding: calcUnbonding(stakingInfo)
       }
       setBalance(address, balance);
 
