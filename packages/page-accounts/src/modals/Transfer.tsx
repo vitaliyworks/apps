@@ -58,8 +58,6 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
     const fromId = propSenderId || senderId as string;
     const toId = propRecipientId || recipientId as string;
 
-    console.log({ fromId, toId });
-
     if (balances && balances.accountId.eq(fromId) && fromId && toId && isFunction(api.rpc.payment?.queryInfo)) {
       setTimeout((): void => {
         try {
