@@ -29,13 +29,12 @@ import Summary from './Summary';
 interface AccountBalance {
   balance: BN;
   locked: BN;
+  transferrable: BN;
 }
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
-  balanceTotal?: BN;
-  transferrableTotal?: BN;
-  lockedTotal?: BN;
+  total: AccountBalance;
 }
 
 interface Sorted {
@@ -122,16 +121,22 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const _setBalance = useCallback(
     (account: string, balance: BN, locked: BN) =>
       setBalances(({ accounts }: Balances): Balances => {
-        accounts[account] = { balance, locked };
+        accounts[account] = {
+          balance,
+          locked,
+          transferrable: BN_ZERO
+        };
 
         const aggregate = (key: keyof AccountBalance) =>
           Object.values(accounts).reduce((total: BN, value: AccountBalance) => total.add(value[key]), BN_ZERO);
 
         return {
           accounts,
-          balanceTotal: aggregate('balance'),
-          lockedTotal: aggregate('locked'),
-          transferrableTotal: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
+          total: {
+            balance: aggregate('balance'),
+            locked: aggregate('locked'),
+            transferrable: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
+          }
         };
       }),
     []
