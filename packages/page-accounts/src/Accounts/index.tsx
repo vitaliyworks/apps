@@ -4,7 +4,7 @@
 import type BN from 'bn.js';
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
 import type { AccountId, ProxyDefinition, ProxyType, Voting } from '@polkadot/types/interfaces';
-import type { Delegation, SortedAccount } from '../types';
+import type { Delegation, SortedAccount, AccountBalance } from '../types';
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -25,12 +25,6 @@ import Account from './Account';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 import Summary from './Summary';
-
-export interface AccountBalance {
-  balance: BN;
-  locked: BN;
-  transferrable: BN;
-}
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
