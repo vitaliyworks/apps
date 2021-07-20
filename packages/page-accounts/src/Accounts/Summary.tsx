@@ -35,6 +35,8 @@ interface Props {
 const Summary = ({ className, total }: Props) => {
   const showBalance = (amount: BN) => <FormatBalance value={amount} />;
 
+  console.log({ total });
+
   return (
     <div className={className} >
       <div>
