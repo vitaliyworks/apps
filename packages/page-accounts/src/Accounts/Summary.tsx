@@ -29,26 +29,26 @@ import BannerExtension from './BannerExtension';
 
 interface Props {
   className?: string;
-  total: AccountBalance;
+  total?: AccountBalance;
 }
 
 const Summary = ({ className, total }: Props) => {
-  const showBalance = (amount: BN) => <FormatBalance value={amount} />;
+  const showBalance = (amount?: BN) => <FormatBalance value={amount} />;
 
   console.log({ total });
 
   return (
     <div className={className} >
       <div>
-        TOTAL BALANCE: {showBalance(total.balance)}
+        TOTAL BALANCE: {showBalance(total?.balance)}
       </div>
 
       <div>
-        TRANSFERRABLE BALANCE: {showBalance(total.transferrable)}
+        TRANSFERRABLE BALANCE: {showBalance(total?.transferrable)}
       </div>
 
       <div>
-        TOTAL LOCKED: {showBalance(total.locked)}
+        TOTAL LOCKED: {showBalance(total?.locked)}
       </div>
     </div>
   )

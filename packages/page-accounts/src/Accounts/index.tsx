@@ -34,7 +34,7 @@ export interface AccountBalance {
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
-  total: AccountBalance;
+  total?: AccountBalance;
 }
 
 interface Sorted {
