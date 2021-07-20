@@ -26,7 +26,7 @@ import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 import Summary from './Summary';
 
-interface AccountBalance {
+export interface AccountBalance {
   balance: BN;
   locked: BN;
   transferrable: BN;
@@ -143,12 +143,8 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   );
 
   const summary = useMemo(() => (
-    <Summary
-      balanceTotal={balances.balanceTotal}
-      transferrableTotal={balances.transferrableTotal}
-      lockedTotal={balances.lockedTotal}
-    />
-  ), [balances.balanceTotal, balances.transferrableTotal]);
+    <Summary total={balances.total} />
+  ), [balances.total]);
 
   const filter = useMemo(() => (
     <div className='filter--tags'>

@@ -5,6 +5,7 @@ import type BN from 'bn.js';
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
 import type { AccountId, ProxyDefinition, ProxyType, Voting } from '@polkadot/types/interfaces';
 import type { Delegation, SortedAccount } from '../types';
+import type { AccountBalance } from './index';
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -26,21 +27,26 @@ import Account from './Account';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
 
-const Summary = ({ className, balanceTotal, transferrableTotal, lockedTotal }: any) => {
+interface Props {
+  className?: string;
+  total: AccountBalance;
+}
+
+const Summary = ({ className, total }: Props) => {
   const showBalance = (amount: BN) => <FormatBalance value={amount} />;
 
   return (
     <div className={className} >
       <div>
-        TOTAL BALANCE: {showBalance(balanceTotal)}
+        TOTAL BALANCE: {showBalance(total.balance)}
       </div>
 
       <div>
-        TRANSFERRABLE BALANCE: {showBalance(transferrableTotal)}
+        TRANSFERRABLE BALANCE: {showBalance(total.transferrable)}
       </div>
 
       <div>
-        TOTAL LOCKED: {showBalance(lockedTotal)}
+        TOTAL LOCKED: {showBalance(total.locked)}
       </div>
     </div>
   )
