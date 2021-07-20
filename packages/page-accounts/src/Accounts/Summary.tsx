@@ -35,8 +35,6 @@ const Summary = ({ className, total }: Props) => {
   const showBalance = (kind: keyof AccountBalance) =>
     <FormatBalance value={total?.[kind]} />;
 
-  console.log({ total });
-
   return (
     <div className={className} >
       <div>

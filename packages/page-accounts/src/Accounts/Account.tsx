@@ -10,7 +10,7 @@ import type { ThemeDef } from '@polkadot/react-components/types';
 import type { Option } from '@polkadot/types';
 import type { ProxyDefinition, RecoveryConfig } from '@polkadot/types/interfaces';
 import type { KeyringAddress, KeyringJson$Meta } from '@polkadot/ui-keyring/types';
-import type { Delegation } from '../types';
+import type { Delegation, AccountBalance } from '../types';
 
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import styled, { ThemeContext } from 'styled-components';
@@ -45,7 +45,7 @@ interface Props {
   filter: string;
   isFavorite: boolean;
   proxy?: [ProxyDefinition[], BN];
-  setBalance: (address: string, totalBalance: BN, lockedBalance: BN) => void;
+  setBalance: (address: string, value: AccountBalance) => void;
   toggleFavorite: (address: string) => void;
 }
 
@@ -118,9 +118,12 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
 
   useEffect((): void => {
     if (balancesAll) {
-      setBalance(address,
-                 balancesAll.freeBalance.add(balancesAll.reservedBalance),
-                 balancesAll.lockedBalance);
+      const balance = {
+        balance: balancesAll.freeBalance.add(balancesAll.reservedBalance),
+        locked: balancesAll.lockedBalance,
+        transferrable: balancesAll.availableBalance
+      }
+      setBalance(address, balance);
 
       api.api.tx.vesting?.vest && setVestingTx(() =>
         balancesAll.vestingLocked.isZero()

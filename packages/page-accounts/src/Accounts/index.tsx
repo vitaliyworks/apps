@@ -113,13 +113,9 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   }, [api, delegations, sortedAccounts]);
 
   const _setBalance = useCallback(
-    (account: string, balance: BN, locked: BN) =>
+    (account: string, balance: AccountBalance) =>
       setBalances(({ accounts }: Balances): Balances => {
-        accounts[account] = {
-          balance,
-          locked,
-          transferrable: BN_ZERO
-        };
+        accounts[account] = balance;
 
         const aggregate = (key: keyof AccountBalance) =>
           Object.values(accounts).reduce((total: BN, value: AccountBalance) => total.add(value[key]), BN_ZERO);
@@ -129,7 +125,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
           total: {
             balance: aggregate('balance'),
             locked: aggregate('locked'),
-            transferrable: BN_ZERO /* FIXME: see Transfer.tsx:69 for calculations */
+            transferrable: aggregate('transferrable') /* FIXME: see AddressInfo.tsx:239 for calculations */
           }
         };
       }),
