@@ -17,14 +17,14 @@ interface Props {
 interface TitleProps {
   className?: string;
   text: string;
-  help: string;
+  help?: string;
 }
 
 function Title({ className, text, help }: TitleProps) {
   return (
     <div className={className}>
       {text}
-      <LabelHelp className={className} help={help}/>
+      {help && <LabelHelp help={help} />}
     </div>
   );
 }
@@ -34,26 +34,24 @@ function Summary({ className, balance }: Props) {
 
   return (
     <SummaryBox className={className}>
-      <section>
-        <CardSummary label={<Title text={t('total balance')} help={'FIXME: add help'}/>}>
-          <FormatBalance value={balance?.total}/>
-        </CardSummary>
-        <CardSummary label={<Title text={t('total transferrable')} help={'FIXME: add help'}/>}>
-          <FormatBalance value={balance?.transferrable}/>
-        </CardSummary>
-        <CardSummary label={<Title text={t('total locked')} help={'FIXME: add help'}/>}>
-          <FormatBalance value={balance?.locked}/>
-        </CardSummary>
-        <CardSummary label={<Title text={t('bonded')} help={'FIXME: add help'}/>}>
-          <FormatBalance value={balance?.bonded}/>
-        </CardSummary>
-        <CardSummary label={<Title text={t('redeemable')} help={'FIXME: add help'}/>}>
-          <FormatBalance value={balance?.redeemable}/>
-        </CardSummary>
-        <CardSummary label={<Title text={t('unbonding')} help={'FIXME: add help'}/>}>
-          <FormatBalance value={balance?.unbonding}/>
-        </CardSummary>
-      </section>
+      <CardSummary label={<Title text={t('total balance')} />}>
+        <FormatBalance value={balance?.total} />
+      </CardSummary>
+      <CardSummary label={<Title text={t('total transferrable')} />}>
+        <FormatBalance value={balance?.transferrable} />
+      </CardSummary>
+      <CardSummary label={<Title text={t('total locked')} help={'FIXME: add help'} />}>
+        <FormatBalance value={balance?.locked} />
+      </CardSummary>
+      <CardSummary label={<Title text={t('total bonded')} />}>
+        <FormatBalance value={balance?.bonded} />
+      </CardSummary>
+      <CardSummary label={<Title text={t('total unbonding')} />}>
+        <FormatBalance value={balance?.unbonding} />
+      </CardSummary>
+      <CardSummary label={<Title text={t('total redeemable')} />}>
+        <FormatBalance value={balance?.redeemable} />
+      </CardSummary>
     </SummaryBox>
   )
 }
