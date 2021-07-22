@@ -29,7 +29,7 @@ export class AccountHooks {
 
   public nonce: BN = new BN(1);
 
-  public balanceOf (balance: number): Balance {
+  public balanceOf (balance: number | string): Balance {
     return balanceOf(balance);
   }
 

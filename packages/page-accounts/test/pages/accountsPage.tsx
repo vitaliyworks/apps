@@ -39,9 +39,9 @@ jest.mock('@polkadot/react-hooks/useBalance', () => ({
   useBalancesAll: (address: string) => ({
     accountNonce: mockAccountHooks.nonce,
     additional: [],
-    freeBalance: mockAccountHooks.balanceOf(1000),
+    freeBalance: mockAccountHooks.balanceOf('1000000000000'),
     lockedBreakdown: [],
-    reservedBalance: mockAccountHooks.balanceOf(500)
+    reservedBalance: mockAccountHooks.balanceOf('50000000000')
   })
 }));
 
