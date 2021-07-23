@@ -20,6 +20,7 @@ const MamaCard = React.memo(styled(CardSummary)`
     float: left;
     background: transparent !important;
     text-align: right;
+    border: none !important;
 
     margin-left: -3rem;
     margin-top: -1px;

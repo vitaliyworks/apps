@@ -96,7 +96,7 @@ function CardSummary ({ children, className = '', help, label, progress }: Props
 
 export default React.memo(styled(CardSummary)`
   align-items: center;
-  background: transparent !important;
+  background: rgb(245, 231, 239) !important;
   border: none !important;
   box-shadow: none !important;
   color: var(--color-summary);
