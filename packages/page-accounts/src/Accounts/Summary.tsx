@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 import { useTranslation } from '@polkadot/app-treasury/translate';
 import { CardSummary, Label, SummaryBox } from '@polkadot/react-components';
+import { formatBalance } from '@polkadot/util';
 import { FormatBalance } from '@polkadot/react-query';
 
 interface Props {
@@ -28,13 +29,19 @@ const MamaCard = React.memo(styled(CardSummary)`
     .ui--Labelled {
       > label {
         margin-bottom: 4px;
+        font-size: 14px;
       }
     }
   }
 
   .--ChildCard-right {
     float: right;
-
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    background: transparent !important;
+    border: none !important;
+  
     .key {
       text-align: left;
     }
@@ -71,8 +78,7 @@ function Summary ({ balance, className }: Props) {
             </CardSummary>
           </article>
 
-          <div className='--ChildCard-right'>
-
+          <article className='--ChildCard-right'>
             <table>
               <tr>
                 <th className='key'>
@@ -88,6 +94,7 @@ function Summary ({ balance, className }: Props) {
                 </th>
                 <th className='value'>
                   <FormatBalance value={balance?.bonded} />
+                  {/* {formatBalance(balance?.bonded)} */}
                 </th>
               </tr>
               <tr>
@@ -100,8 +107,7 @@ function Summary ({ balance, className }: Props) {
               </tr>
 
             </table>
-
-          </div>
+          </article>
 
         </MamaCard>
         }
