@@ -17,21 +17,13 @@ interface Props {
 }
 
 const MamaCard = React.memo(styled(CardSummary)`
+
   .--ChildCard-left {
     float: left;
-    background: transparent !important;
+    /* background: transparent !important; */
+    background: red !important;
     text-align: right;
     border: none !important;
-
-    margin-left: -3rem;
-    margin-top: -1px;
-
-    .ui--Labelled {
-      > label {
-        margin-bottom: 4px;
-        font-size: 14px;
-      }
-    }
   }
 
   .--ChildCard-right {
@@ -39,7 +31,8 @@ const MamaCard = React.memo(styled(CardSummary)`
     justify-content: center;
     align-items: center;
     font-size: 14px;
-    background: transparent !important;
+    /* background: transparent !important; */
+    background: red !important;
     border: none !important;
   
     .key {
@@ -69,16 +62,15 @@ function Summary ({ balance, className }: Props) {
         <CardSummary label={t<string>('total transferrable')}>
           <FormatBalance value={balance?.transferrable} />
         </CardSummary>}
-      {balance?.locked.gtn(0) &&
+      {true &&
         <MamaCard label={null} >
 
-          <article className='--ChildCard-left'>
-            <CardSummary label={t<string>('total locked')}>
-              <FormatBalance value={balance?.locked} />
-            </CardSummary>
-          </article>
+          <div className='--ChildCard-left'>
+            <Label label={t<string>('total locked')} />
+            <FormatBalance value={balance?.locked} />
+          </div>
 
-          <article className='--ChildCard-right'>
+          <div className='--ChildCard-right'>
             <table>
               <tr>
                 <th className='key'>
@@ -94,7 +86,6 @@ function Summary ({ balance, className }: Props) {
                 </th>
                 <th className='value'>
                   <FormatBalance value={balance?.bonded} />
-                  {/* {formatBalance(balance?.bonded)} */}
                 </th>
               </tr>
               <tr>
@@ -107,7 +98,7 @@ function Summary ({ balance, className }: Props) {
               </tr>
 
             </table>
-          </article>
+          </div>
 
         </MamaCard>
         }
