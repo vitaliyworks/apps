@@ -51,6 +51,12 @@ describe('Accounts page', () => {
 
       expect(noAccountsMessage).not.toBeNull();
     });
+
+    it('no summary displays', async () => {
+      accountsPage.renderPage([]);
+      const summaries = screen.queryAllByTestId(/card-summary:total \w+/i);
+      expect(summaries).toHaveLength(0);
+    });
   });
 
   describe('when some accounts exist', () => {
@@ -63,6 +69,16 @@ describe('Accounts page', () => {
       const accountRows = await accountsPage.findAccountRows();
 
       expect(accountRows).toHaveLength(2);
+    });
+
+    it('some summary displays', async () => {
+      accountsPage.renderPage([
+        { id: '5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy', totalBalance: 10000 },
+        { id: '5HGjWAeFDfFCWPsjFQdVV2Msvz2XtMktvgocEZcCj68kUMaw', totalBalance: 999 }
+      ]);
+
+      const summaries = screen.queryAllByTestId(/card-summary:total \w+/i);
+      expect(summaries).not.toHaveLength(0);
     });
 
     function showBalance(amount: string | number | BN) {
