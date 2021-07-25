@@ -1,7 +1,7 @@
 // Copyright 2017-2021 @polkadot/page-accounts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type { DeriveBalancesAll } from '@polkadot/api-derive/types';
+import type { DeriveBalancesAll, DeriveStakingAccount } from '@polkadot/api-derive/types';
 
 import BN from 'bn.js';
 
@@ -27,10 +27,24 @@ export const someBalances: DeriveBalancesAll = {
   reservedBalance: balanceOf('50000000000')
 } as any;
 
+export const someStakingAccount: DeriveStakingAccount = {
+  accountId: '' as any,
+  stakingLedger: '' as any,
+  controllerId: '' as any,
+  exposure: '' as any,
+  nominators: [],
+  rewardDestination: '' as any,
+  stashId: '' as any,
+  validatorPrefs: '' as any,
+  nextSessionIds: [],
+  sessionIds: [],
+};
+
 class MockAccountHooks {
   public useAccounts: UseAccounts = emptyAccounts;
 
   public accountBalances: DeriveBalancesAll = someBalances;
+  public accountInfo: DeriveStakingAccount = someStakingAccount;
 
   public nonce: BN = new BN(1);
 
