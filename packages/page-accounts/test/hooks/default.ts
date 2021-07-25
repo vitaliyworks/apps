@@ -47,6 +47,20 @@ export const someStakingAccount: DeriveStakingAccount = {
   validatorPrefs: null as any,
   nextSessionIds: [],
   sessionIds: [],
+  unlocking: [
+    {
+      remainingEras: new BN('1000000000'),
+      value: balanceOf('1000000000')
+    },
+    {
+      remainingEras: new BN('2000000000'),
+      value: balanceOf('2000000000')
+    },
+    {
+      remainingEras: new BN('3000000000'),
+      value: balanceOf('3000000000')
+    }
+  ],
   redeemable: balanceOf('300000000')
 };
 
