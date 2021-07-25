@@ -1,7 +1,7 @@
 // Copyright 2017-2021 @polkadot/page-accounts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { within } from '@testing-library/react';
+import { within, screen } from '@testing-library/react';
 
 import i18next from '@polkadot/react-components/i18n';
 import { MemoryStore } from '@polkadot/test-support/keyring';
@@ -9,6 +9,7 @@ import { keyring } from '@polkadot/ui-keyring';
 import { formatBalance } from '@polkadot/util';
 
 import { AccountsPage } from '../../test/pages/accountsPage';
+import { someBalances } from '../../test/hooks/default';
 
 describe('Accounts page', () => {
   let accountsPage: AccountsPage;
@@ -78,6 +79,20 @@ describe('Accounts page', () => {
 
       // check that we don't compare 0.0000 vs 0.0000 because of rounding
       expect(expectedText).not.toBe(formatBalance('0', { decimals: 12, withUnit: false }));
+    });
+    
+    it('total balance summary displays the total balance', async () => {
+      accountsPage.renderPage([
+        { id: '5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy', totalBalance: 10000 },
+        { id: '5HGjWAeFDfFCWPsjFQdVV2Msvz2XtMktvgocEZcCj68kUMaw', totalBalance: 999 }
+      ]);
+
+      // Two accounts have Free + Reserved balance
+      const expectedAmount = someBalances.freeBalance.add(someBalances.reservedBalance).muln(2);
+      const expectedText = formatBalance(expectedAmount, { decimals: 12, withUnit: false });
+
+      const summary = await screen.findByTestId(/card-summary:total balance/i);
+      expect(summary).toHaveTextContent(expectedText);
     });
   });
 });
