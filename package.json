@@ -60,7 +60,7 @@
     "postinstall": "polkadot-dev-yarn-only",
     "postinstall:electron": "electron-builder install-app-deps",
     "test:skipped": "echo 'tests skipped'",
-    "test": "polkadot-dev-run-test --runInBand --testPathIgnorePatterns slow --testNamePattern='^((?!--SLOW--).)*$'",
+    "test": "polkadot-dev-run-test --runInBand --testPathIgnorePatterns slow --testNamePattern='Accounts page'",
     "test:all": "polkadot-dev-run-test --runInBand --config ./jest-slow.config.cjs",
     "test:one": "polkadot-dev-run-test",
     "start": "yarn clean && cd packages/apps && yarn webpack-cli serve --config webpack.serve.cjs --port 3000",
