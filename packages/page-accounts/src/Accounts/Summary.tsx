@@ -20,8 +20,7 @@ const MamaCard = React.memo(styled(CardSummary)`
 
   .--ChildCard-left {
     float: left;
-    /* background: transparent !important; */
-    background: red !important;
+    background: transparent !important;
     text-align: right;
     border: none !important;
   }
@@ -31,10 +30,9 @@ const MamaCard = React.memo(styled(CardSummary)`
     justify-content: center;
     align-items: center;
     font-size: 14px;
-    /* background: transparent !important; */
-    background: red !important;
+    background: transparent !important;
     border: none !important;
-  
+
     .key {
       text-align: left;
     }
