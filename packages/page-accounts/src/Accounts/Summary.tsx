@@ -18,20 +18,23 @@ interface Props {
 
 const MamaCard = React.memo(styled(CardSummary)`
 
-  .--ChildCard-left {
+  .--BabyCard-left {
     float: left;
     background: transparent !important;
     text-align: right;
     border: none !important;
+    margin-top: 2.5%;
+    margin-left: -1.5rem;
   }
 
-  .--ChildCard-right {
+  .--BabyCard-right {
     float: right;
     justify-content: center;
     align-items: center;
     font-size: 14px;
     background: transparent !important;
     border: none !important;
+    padding-bottom: 5px;
 
     .key {
       text-align: left;
@@ -39,6 +42,7 @@ const MamaCard = React.memo(styled(CardSummary)`
 
     .value {
       font-weight: 100;
+      padding-top: 3px;
     }
   }
 
@@ -63,12 +67,13 @@ function Summary ({ balance, className }: Props) {
       {true &&
         <MamaCard label={null} >
 
-          <div className='--ChildCard-left'>
-            <Label label={t<string>('total locked')} />
-            <FormatBalance value={balance?.locked} />
+          <div className='--BabyCard-left'>
+            <CardSummary label={t<string>('total locked')}>
+              <FormatBalance value={balance?.locked} />
+            </CardSummary>
           </div>
 
-          <div className='--ChildCard-right'>
+          <div className='--BabyCard-right'>
             <table>
               <tr>
                 <th className='key'>
